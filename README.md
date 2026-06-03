@@ -148,13 +148,15 @@
                     } else {
                         const panel = this.querySelector('.mobile-panel');
                         const arrow = this.querySelector('.mobile-arrow');
-                        if (panel.style.display === 'block') {
-                            panel.style.display = 'none';
-                            arrow.setAttribute('class', 'mobile-arrow bounce-down');
-                        } else {
-                            panel.style.display = 'block';
-                            arrow.setAttribute('class', 'mobile-arrow bounce-up');
-                        }
+if (panel.style.display === 'block') {
+    panel.style.display = 'none';
+    arrow.setAttribute('class', 'mobile-arrow bounce-down');
+    arrow.style.transform = 'rotate(0deg)'; // فلش به پایین برمی‌گردد
+} else {
+    panel.style.display = 'block';
+    arrow.setAttribute('class', 'mobile-arrow bounce-up');
+    arrow.style.transform = 'rotate(180deg)'; // فلش به بالا می‌چرخد
+}
                     }
                 });
                 grid.appendChild(card);
