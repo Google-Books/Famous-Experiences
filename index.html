@@ -149,19 +149,18 @@
                         const panel = this.querySelector('.mobile-panel');
                         const arrow = this.querySelector('.mobile-arrow');
 if (panel.style.display === 'block') {
+    // بستن پنل
     panel.style.display = 'none';
     arrow.setAttribute('class', 'mobile-arrow bounce-down');
-    arrow.style.transform = 'rotate(0deg)'; // فلش به پایین برمی‌گردد
+    // تغییر مسیر به فلش رو به پایین
+    arrow.innerHTML = `<path d="M7.41,8.59L12,13.17L16.59,8.59L18,10L12,16L6,10L7.41,8.59Z"/>`;
 } else {
+    // باز کردن پنل
     panel.style.display = 'block';
     arrow.setAttribute('class', 'mobile-arrow bounce-up');
-    arrow.style.transform = 'rotate(180deg)'; // فلش به بالا می‌چرخد
+    // تغییر مسیر به فلش رو به بالا
+    arrow.innerHTML = `<path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"/>`;
 }
-                    }
-                });
-                grid.appendChild(card);
-            });
-        }
 
         function openArchiveDetail(entity) {
             const overlay = document.getElementById('desktopOverlay');
