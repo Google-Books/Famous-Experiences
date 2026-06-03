@@ -120,46 +120,52 @@
             { name: "Anthony Weiner", subtitle: "Apartment, 2005", img: "https://trilliardaire.sirv.com/%D9%86%D8%B8%D8%B1%DB%8C%D9%87%20%D9%87%D8%A7%DB%8C%20%D8%A7%D8%AF%D9%85%20%D9%87%D8%A7%DB%8C%20%D9%85%D8%B4%D9%87%D9%88%D8%B1/Anthony%20Weiner.jpg", desc: "Reported fear-related experiences in isolated environments...", full: `<div class="detail-header">Entity / Phenomenon</div><div class="detail-text">Fear-related experiences in isolation.</div><div class="detail-header">The Account</div><div class="detail-text">Reported fear-related experiences in isolated environments. He reduced anxiety by increasing lighting, seeking support, and focusing on rational interpretation.</div>` }
         ];
 
-        function renderGrid() {
-            const grid = document.getElementById('grid');
-            entities.forEach((entity, index) => {
-                const card = document.createElement('div');
-                card.className = 'entity-card';
-                card.innerHTML = `
-                    <div class="img-container"><img src="${entity.img}" alt="${entity.name}"></div>
-                    <div class="content">
-                        <h2>${entity.name}</h2>
-                        <h4>${entity.subtitle}</h4>
-                        <p>${entity.desc}</p>
-                    </div>
-                    <div class="mobile-arrow-container">
-                        <svg class="mobile-arrow bounce-down" viewBox="0 0 24 24"><path d="M7.41,8.59L12,13.17L16.59,8.59L18,10L12,16L6,10L7.41,8.59Z"/></svg>
-                    </div>
-                    <div class="mobile-panel">
-                        <h2 style="font-family:'Cinzel', serif; color:#fff; text-align:center; border-bottom:1px solid var(--accent); padding-bottom:10px;">${entity.name}</h2>
-                        <h4 style="text-align:center; color:var(--purple-light); letter-spacing:1px;">${entity.subtitle}</h4>
-                        ${entity.full}
-                    </div>
-                `;
-                
-                card.addEventListener('click', function(e) {
-                    if (window.innerWidth > 768) {
-                        openArchiveDetail(entity);
-                    } else {
-                        const panel = this.querySelector('.mobile-panel');
-                        const arrow = this.querySelector('.mobile-arrow');
-if (panel.style.display === 'block') {
-    // بستن پنل
-    panel.style.display = 'none';
-    arrow.setAttribute('class', 'mobile-arrow bounce-down');
-    // تغییر مسیر به فلش رو به پایین
-    arrow.innerHTML = `<path d="M7.41,8.59L12,13.17L16.59,8.59L18,10L12,16L6,10L7.41,8.59Z"/>`;
-} else {
-    // باز کردن پنل
-    panel.style.display = 'block';
-    arrow.setAttribute('class', 'mobile-arrow bounce-up');
-    // تغییر مسیر به فلش رو به بالا
-    arrow.innerHTML = `<path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"/>`;
+function renderGrid() {
+    const grid = document.getElementById('grid');
+    entities.forEach((entity, index) => {
+        const card = document.createElement('div');
+        card.className = 'entity-card';
+        card.innerHTML = `
+            <div class="img-container"><img src="${entity.img}" alt="${entity.name}"></div>
+            <div class="content">
+                <h2>${entity.name}</h2>
+                <h4>${entity.subtitle}</h4>
+                <p>${entity.desc}</p>
+            </div>
+            <div class="mobile-arrow-container">
+                <svg class="mobile-arrow bounce-down" viewBox="0 0 24 24"><path d="M7.41,8.59L12,13.17L16.59,8.59L18,10L12,16L6,10L7.41,8.59Z"/></svg>
+            </div>
+            <div class="mobile-panel">
+                <h2 style="font-family:'Cinzel', serif; color:#fff; text-align:center; border-bottom:1px solid var(--accent); padding-bottom:10px;">${entity.name}</h2>
+                <h4 style="text-align:center; color:var(--purple-light); letter-spacing:1px;">${entity.subtitle}</h4>
+                ${entity.full}
+            </div>
+        `;
+        
+        card.addEventListener('click', function(e) {
+            if (window.innerWidth > 768) {
+                // دسکتاپ
+                openArchiveDetail(entity);
+            } else {
+                // موبایل
+                const panel = this.querySelector('.mobile-panel');
+                const arrow = this.querySelector('.mobile-arrow');
+
+                if (panel.style.display === 'block') {
+                    // بستن پنل
+                    panel.style.display = 'none';
+                    arrow.setAttribute('class', 'mobile-arrow bounce-down');
+                    arrow.innerHTML = `<path d="M7.41,8.59L12,13.17L16.59,8.59L18,10L12,16L6,10L7.41,8.59Z"/>`;
+                } else {
+                    // باز کردن پنل
+                    panel.style.display = 'block';
+                    arrow.setAttribute('class', 'mobile-arrow bounce-up');
+                    arrow.innerHTML = `<path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"/>`;
+                }
+            }
+        });
+        grid.appendChild(card);
+    });
 }
 
         function openArchiveDetail(entity) {
